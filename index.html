@@ -1,41 +1,28 @@
 <!doctype html>
-<html lang="en">
+<html lang="zh-CN">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>prototype</title>
-    <script type="module" crossorigin src="./assets/index-KYsTJiOi.js"></script>
-    <link rel="stylesheet" crossorigin href="./assets/index-DHEmYbAO.css">
+    <title>福华条码系统</title>
+    <script type="module" crossorigin src="./assets/index-CrBycPHg.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-Dl_eSqA9.css">
     <style>
       #passwordGate {
-        position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+        position: fixed; inset: 0; width: 100vw; height: 100vh;
         background: #1a1a2e; z-index: 99999;
         display: flex; flex-direction: column; align-items: center; justify-content: center;
         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
       }
       #passwordGate.hidden { display: none !important; }
-      #passwordGate .pwd-title {
-        color: #e0e0e0; font-size: 20px; font-weight: 600; margin-bottom: 24px; letter-spacing: 1px;
-      }
-      #passwordGate .pwd-box {
-        display: flex; align-items: center; gap: 12px;
-      }
-      #passwordGate input {
-        width: 200px; height: 44px; border: 2px solid #3a3a5c; border-radius: 8px;
-        background: #16213e; color: #fff; font-size: 18px; text-align: center; outline: none;
-        letter-spacing: 4px; padding: 0 12px;
-      }
+      #passwordGate .pwd-title { color: #e0e0e0; font-size: 20px; font-weight: 600; margin-bottom: 24px; letter-spacing: 1px; }
+      #passwordGate .pwd-box { display: flex; align-items: center; gap: 12px; }
+      #passwordGate input { width: 200px; height: 44px; border: 2px solid #3a3a5c; border-radius: 8px; background: #16213e; color: #fff; font-size: 18px; text-align: center; outline: none; letter-spacing: 4px; padding: 0 12px; }
       #passwordGate input:focus { border-color: #4a90d9; }
-      #passwordGate input::placeholder { color: #555; letter-spacing: 0; font-size: 14px; }
-      #passwordGate button {
-        height: 44px; padding: 0 20px; border: none; border-radius: 8px;
-        background: #4a90d9; color: #fff; font-size: 15px; cursor: pointer; font-weight: 500;
-      }
+      #passwordGate input::placeholder { color: #777; letter-spacing: 0; font-size: 14px; }
+      #passwordGate button { height: 44px; padding: 0 20px; border: none; border-radius: 8px; background: #4a90d9; color: #fff; font-size: 15px; cursor: pointer; font-weight: 500; }
       #passwordGate button:hover { background: #3a7bc8; }
-      #passwordGate .pwd-error {
-        color: #ff6b6b; font-size: 13px; margin-top: 16px; height: 18px;
-      }
+      #passwordGate .pwd-error { color: #ff6b6b; font-size: 13px; margin-top: 16px; height: 18px; }
     </style>
   </head>
   <body>
@@ -43,31 +30,33 @@
       <div class="pwd-title">请输入访问密码</div>
       <div class="pwd-box">
         <input type="password" id="pwdInput" placeholder="输入密码" autocomplete="off" />
-        <button id="pwdBtn">进入</button>
+        <button id="pwdBtn" type="button">进入</button>
       </div>
       <div class="pwd-error" id="pwdError"></div>
     </div>
     <div id="root"></div>
     <script>
-      (function() {
-        var CORRECT = '0712';
-        var gate = document.getElementById('passwordGate');
-        var input = document.getElementById('pwdInput');
-        var btn = document.getElementById('pwdBtn');
-        var err = document.getElementById('pwdError');
+      (function () {
+        var CORRECT = "0712";
+        var gate = document.getElementById("passwordGate");
+        var input = document.getElementById("pwdInput");
+        var btn = document.getElementById("pwdBtn");
+        var err = document.getElementById("pwdError");
         function check() {
           if (input.value === CORRECT) {
-            gate.classList.add('hidden');
-            sessionStorage.setItem('fuhua_auth', '1');
+            gate.classList.add("hidden");
+            sessionStorage.setItem("fuhua_auth", "1");
           } else {
-            err.textContent = '密码错误，请重新输入';
-            input.value = '';
+            err.textContent = "密码错误，请重新输入";
+            input.value = "";
             input.focus();
           }
         }
-        btn.addEventListener('click', check);
-        input.addEventListener('keydown', function(e) { if (e.key === 'Enter') check(); });
-        if (sessionStorage.getItem('fuhua_auth') === '1') gate.classList.add('hidden');
+        btn.addEventListener("click", check);
+        input.addEventListener("keydown", function (event) {
+          if (event.key === "Enter") check();
+        });
+        if (sessionStorage.getItem("fuhua_auth") === "1") gate.classList.add("hidden");
         input.focus();
       })();
     </script>
